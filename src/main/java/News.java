@@ -1,11 +1,18 @@
 import java.util.Date;
+import java.util.Objects;
 
 public class News {
     private String title;
     private String description;
     private Date date;
     
-    public News(String title, String description, Date date) {
+    public News(String title, String description) {
+        if (Objects.equals(title, "")) {
+            throw new IllegalArgumentException("Título da notícia não pode ser vazio.");
+        }
+        if (Objects.equals(description, "")) {
+            throw new IllegalArgumentException("Corpo da notícia não pode ser vazio.");
+        }
         this.title = title;
         this.description = description;
         this.date = new Date();

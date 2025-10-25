@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Contact {
     private String subject;
     private String messageContent;
@@ -6,10 +8,23 @@ public class Contact {
     private String phone;
 
 
-    public Contact(String name, String email, String phone) {
+    public Contact(String name, String email, String subject, String messageContent ) {
+        if (Objects.equals(name, "")) {
+            throw new IllegalArgumentException("Nome do remetente não pode ser vazio.");
+        }
+        if (Objects.equals(email, "")) {
+            throw new IllegalArgumentException("Email do remetente não pode ser vazio.");
+        }
+        if (Objects.equals(subject, "")) {
+            throw new IllegalArgumentException("Assunto não pode ser vazio.");
+        }
+        if (Objects.equals(messageContent, "")) {
+            throw new IllegalArgumentException("Mensagem não pode ser vazia.");
+        }
         this.name = name;
         this.email = email;
-        this.phone = phone;
+        this.subject = subject;
+        this.messageContent = messageContent;
     }
 
     public String getName() {
@@ -52,10 +67,7 @@ public class Contact {
         this.messageContent = messageContent;
     }
 
-    public boolean sendMessage(String message){
-        if(name == null || email == null  || messageContent == null || subject == null){
-            return false;
-        };
+    public boolean sendMessage(){
         if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
             return false;
         }
